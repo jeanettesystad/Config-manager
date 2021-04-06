@@ -1,7 +1,7 @@
-﻿
+﻿JJ Config manager :-)
 
 
-Tabeller:
+Tables:
 
 Admin
 username (key)
@@ -9,15 +9,16 @@ password
 
 
 Environments
-name (e.g. Dev) (key)
+environment-name (e.g. Dev) (key)
 description (long name - Development)
 
 
 Configdata
 config-name (key)
 environment-name (FK name - environments)(key)
+application (key)
 value
-timestamp (key)
+timestamp (for last change (add/edit))
 
 
 
