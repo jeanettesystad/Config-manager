@@ -1,1 +1,42 @@
 ﻿
+
+
+Tabeller:
+
+Admin
+username (key)
+password
+
+
+Environments
+name (e.g. Dev) (key)
+description (long name - Development)
+
+
+Configdata
+config-name (key)
+environment-name (FK name - environments)(key)
+value
+timestamp (key)
+
+
+
+Client:
+
+Welcome screen:
+- some text and a picture?
+- menu
+
+
+View Config data screen:
+- list environments (dev, test, prod, etc)
+- these are links
+
+- list config data for this environment
+- different color for each environment
+- log-in prompt if 
+
+Admin screen:
+- TBD
+
+
