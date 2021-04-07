@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities
 {
-    public class Environment
+    [Table("EnvironmentT")]
+    public class EnvironmentT
     {
         public string Name { get; set; }
         public string Description { get; set; }

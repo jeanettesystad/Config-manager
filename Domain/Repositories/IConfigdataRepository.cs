@@ -7,11 +7,9 @@ namespace Domain.Repositories
     {
         IEnumerable<Configdata> Configdatas { get; }
 
-        Configdata Get(long Id);
+        Configdata GetConfigdataById(long Id);
 
-        bool CreateConfigdata(Configdata configdata);
-        bool EditConfigdata(long Id);
-        bool DeleteConfigdata(long Id);
+        //bool AddEnvironment(long id, Environment environment);
 
     }
 }

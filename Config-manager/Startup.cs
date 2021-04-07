@@ -32,7 +32,7 @@ namespace Config_manager
         {
 
             
-            //services.AddTransient<IConfigdataRepository, SqlConfigRepository>();
+            services.AddTransient<IConfigdataRepository, SqlConfigRepository>();
 
             
             var connectionString = Configuration["ConnectionStrings:ConfigManagerContext"];
@@ -54,7 +54,7 @@ namespace Config_manager
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebUserInterface", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "JJConfigManager", Version = "v1" });
             });
         }
 
@@ -71,6 +71,8 @@ namespace Config_manager
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(allowSpecificOrigins);
 
             app.UseAuthorization();
 
