@@ -11,11 +11,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Domain.Repositories;
+
 
 namespace Config_manager
 {
     public class Startup
     {
+        readonly string allowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -23,14 +28,33 @@ namespace Config_manager
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
+            
+            //services.AddTransient<IConfigdataRepository, SqlConfigRepository>();
+
+            
+            var connectionString = Configuration["ConnectionStrings:ConfigManagerContext"];
+
+            // Configure EF.
+            services.AddEntityFrameworkSqlServer()
+                    .AddDbContext<ConfigManagerContext>(options => options.UseSqlServer(connectionString));
+
+            // Configure a CORS policy.
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: allowSpecificOrigins,
+                                  builder => builder.WithOrigins("http://localhost:3000")
+                                                    .AllowAnyMethod()
+                                                    .AllowAnyHeader());
+            });
+
             services.AddControllers();
+
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Config_manager", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebUserInterface", Version = "v1" });
             });
         }
 

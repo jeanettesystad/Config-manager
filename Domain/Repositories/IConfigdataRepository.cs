@@ -7,11 +7,11 @@ namespace Domain.Repositories
     {
         IEnumerable<Configdata> Configdatas { get; }
 
-        Configdata Get(string configName, string application, string environmentName);
+        Configdata Get(long Id);
 
         bool CreateConfigdata(Configdata configdata);
-        bool EditConfigdata(string configName, string application, string environmentName);
-        bool DeleteConfigdata(string configName, string application, string environmentName);
+        bool EditConfigdata(long Id);
+        bool DeleteConfigdata(long Id);
 
     }
 }
