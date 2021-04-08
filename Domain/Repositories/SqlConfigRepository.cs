@@ -12,34 +12,30 @@ namespace Domain.Repositories
         private ConfigManagerContext context;
 
         public IEnumerable<Configdata> Configdatas => context.Configdatas;
-        //public IEnumerable<EnvironmentT> Environments => context.EnvironmentTs;
 
         public SqlConfigRepository(ConfigManagerContext context)
         {
             this.context = context;
         }
 
-        //public IEnumerable<Configdata> Configdatas;
+        
+
+        
+
 
 
         public Configdata GetConfigdataById(long id)
         {
             return context.Configdatas
-                        //  .Include("Enviro")
+                          //.Include("EnvironmentT")
                           .Where(c => c.Id == id)
                           .FirstOrDefault();
         }
 
+      
 
 
-
-        /*
-        public EnvironmentT GetEnvironmentByName(string name)
-        {
-                return context.EnvironmentTs
-                            .Where(e => e.Name == name)
-                            .FirstOrDefault();
-        }*/
+       
 
 
         public bool CreateConfigdata(Configdata configdata)

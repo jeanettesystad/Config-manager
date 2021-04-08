@@ -15,6 +15,6 @@ namespace Domain.Entities
         public string Value { get; set; }
         public DateTime Timestamp { get; set; }
 
-        //public EnvironmentT Enviro { get; set; }
+        public virtual EnvironmentT EnvironmentT { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace Domain.Repositories
 
         Configdata GetConfigdataById(long Id);
 
-        //bool AddEnvironment(long id, Environment environment);
 
     }
 }

@@ -40,6 +40,8 @@ namespace Config_manager.Controllers
             }
         }
 
+        
+        /*
         // POST api/<ConfigurationsController>
         [HttpPost]
         public void Post([FromBody] string value)
@@ -57,5 +59,6 @@ namespace Config_manager.Controllers
         public void Delete(int id)
         {
         }
+        */
     }
 }
