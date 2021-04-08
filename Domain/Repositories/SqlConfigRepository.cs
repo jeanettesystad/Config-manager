@@ -1,6 +1,5 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +18,8 @@ namespace Domain.Repositories
             this.context = context;
         }
 
-        
+        public IEnumerable<Environment> Environments => 
+            context.Environments;
 
         
 
@@ -41,17 +41,17 @@ namespace Domain.Repositories
 
         public bool CreateConfigdata(Configdata configdata)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool DeleteConfigdata(long Id)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         public bool EditConfigdata(long Id)
         {
-            throw new NotImplementedException();
+            return false;
         }
 
         

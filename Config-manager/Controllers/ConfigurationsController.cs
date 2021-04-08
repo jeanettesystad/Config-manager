@@ -9,7 +9,7 @@ using Domain.Repositories;
 
 namespace Config_manager.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     [ApiController]
     public class ConfigurationsController : ControllerBase
     {
@@ -20,13 +20,13 @@ namespace Config_manager.Controllers
             this.repository = repository;
         }
 
-        [HttpGet]
-        public ActionResult<IEnumerable<Configdata>> Get()
+        [HttpGet("getConfigurations")]
+        public ActionResult<IEnumerable<Configdata>> GetConfigdata()
         {
             return Ok(repository.Configdatas);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("getConfiguration/{id}")]
         public ActionResult<Configdata> GetById(long id)
         {
             Configdata configdata = repository.GetConfigdataById(id);
@@ -41,6 +41,11 @@ namespace Config_manager.Controllers
         }
 
         
+        [HttpGet("getEnvironments")]
+        public ActionResult<IEnumerable<Domain.Entities.Environment>> GetEnvironments()
+        {
+            return Ok(repository.Environments);
+        }
         
     }
 }

@@ -9,6 +9,6 @@ namespace Domain.Repositories
 
         Configdata GetConfigdataById(long Id);
 
-
+        IEnumerable<Environment> Environments { get; }
     }
 }
