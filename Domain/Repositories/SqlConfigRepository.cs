@@ -34,9 +34,12 @@ namespace Domain.Repositories
 
       
 
-        public bool CreateConfigdata(Configdata configdata)
+        public bool InsertConfigdata(Configdata configdata)
         {
-            return false;
+            context.Configdatas.Add(configdata);
+            context.SaveChanges();
+
+            return true;
         }
 
         public bool DeleteConfigdata(long id)
@@ -44,7 +47,7 @@ namespace Domain.Repositories
             return false;
         }
 
-        public bool EditConfigdata(long id)
+        public bool UpdateConfigdata(Configdata configdata)
         {
             return false;
         }
@@ -69,7 +72,7 @@ namespace Domain.Repositories
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteEnvironment(int id)
+        public bool DeleteEnvironment(long id)
         {
             throw new System.NotImplementedException();
         }

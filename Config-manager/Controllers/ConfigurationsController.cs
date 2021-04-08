@@ -41,6 +41,22 @@ namespace Config_manager.Controllers
             }
         }
 
+        [HttpPost("postConfiguration")]
+        public ActionResult<Configdata> Insert(Configdata configdata)
+        {
+            if (configdata == null)
+            {
+                return BadRequest();
+            }
+            else
+            {
+                repository.InsertConfigdata(configdata);
+
+                return Ok(configdata);
+            }
+        }
+
+
         /*
         // POST api/productsuggestions
         [HttpPost]

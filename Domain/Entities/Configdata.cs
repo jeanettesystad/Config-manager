@@ -13,7 +13,11 @@ namespace Domain.Entities
         public string Application { get; set; }
         public string Value { get; set; }
         public DateTime Timestamp { get; set; }
+        public long EnvironmentId { get; set; }
 
         public virtual Environment Environment { get; set; }
     }
+
+
+
 }
