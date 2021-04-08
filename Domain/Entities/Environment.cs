@@ -12,6 +12,6 @@ namespace Domain.Entities
         public string EnvironmentName { get; set; }
         public string Description { get; set; }
 
-        //public virtual ICollection<Configdata> Configdatas { get; set; }
+        public virtual ICollection<Configdata> Configdatas { get; set; }
     }
 }

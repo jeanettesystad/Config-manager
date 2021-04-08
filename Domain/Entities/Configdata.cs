@@ -15,7 +15,7 @@ namespace Domain.Entities
         public DateTime Timestamp { get; set; }
         public long EnvironmentId { get; set; }
 
-        public virtual Environment Environment { get; set; }
+        //public virtual Environment Environment { get; set; }
     }
 
 

@@ -18,7 +18,7 @@ namespace Domain.Repositories
 
         IEnumerable<Environment> Environments { get; }
 
-        Environment GetEnvironmentById(int id);
+        Environment GetEnvironmentById(long id);
 
         
 

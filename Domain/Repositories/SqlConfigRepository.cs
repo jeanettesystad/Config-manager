@@ -11,10 +11,10 @@ namespace Domain.Repositories
         private ConfigManagerContext context;
 
         public IEnumerable<Configdata> Configdatas => 
-            context.Configdatas.Include("Environment");
+            context.Configdatas;
 
         public IEnumerable<Environment> Environments =>
-            context.Environments;
+            context.Environments.Include("Configdatas");
 
 
         public SqlConfigRepository(ConfigManagerContext context)
@@ -27,7 +27,6 @@ namespace Domain.Repositories
         public Configdata GetConfigdataById(long id)
         {
             return context.Configdatas
-                          .Include("Environment")
                           .Where(c => c.Id == id)
                           .FirstOrDefault();
         }
@@ -52,9 +51,10 @@ namespace Domain.Repositories
             return false;
         }
 
-        public Environment GetEnvironmentById(int id)
+        public Environment GetEnvironmentById(long id)
         {
             return context.Environments
+                          .Include("Configdatas")
                           .Where(e => e.Id == id)
                           .FirstOrDefault();
         }

@@ -116,7 +116,20 @@ namespace Config_manager.Controllers
             return Ok(repository.Environments);
         }
 
-        
+        [HttpGet("getEnvionments/{id}")]
+        public ActionResult<Configdata> GetEnvironmentsById(long id)
+        {
+            Environment environment = repository.GetEnvironmentById(id);
+            if (environment == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(environment);
+            }
+        }
+
         [HttpPost("postEnvironment")]
         public ActionResult<Environment> Insert(Environment environment)
         {
