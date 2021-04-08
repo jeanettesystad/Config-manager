@@ -11,10 +11,9 @@ namespace Domain.Entities
         public long Id { get; set; }
         public string ConfigName { get; set; }
         public string Application { get; set; }
-        public string EnvironmentName { get; set; }
         public string Value { get; set; }
         public DateTime Timestamp { get; set; }
 
-        public virtual EnvironmentT EnvironmentT { get; set; }
+        public virtual Environment Environment { get; set; }
     }
 }

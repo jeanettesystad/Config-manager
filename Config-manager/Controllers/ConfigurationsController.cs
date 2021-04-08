@@ -41,24 +41,6 @@ namespace Config_manager.Controllers
         }
 
         
-        /*
-        // POST api/<ConfigurationsController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ConfigurationsController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ConfigurationsController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-        */
+        
     }
 }

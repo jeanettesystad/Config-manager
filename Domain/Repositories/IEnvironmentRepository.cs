@@ -5,9 +5,9 @@ namespace Domain.Repositories
 {
     public interface IEnvironmentRepository
     {
-        IEnumerable<EnvironmentT> Environments { get; }
+        IEnumerable<Environment> Environments { get; }
 
-        EnvironmentT GetDescription(string name);
+        Environment GetDescription(string name);
 
     }
 }

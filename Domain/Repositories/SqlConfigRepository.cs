@@ -11,7 +11,8 @@ namespace Domain.Repositories
     {
         private ConfigManagerContext context;
 
-        public IEnumerable<Configdata> Configdatas => context.Configdatas;
+        public IEnumerable<Configdata> Configdatas => 
+            context.Configdatas.Include("Environment");
 
         public SqlConfigRepository(ConfigManagerContext context)
         {
@@ -27,7 +28,7 @@ namespace Domain.Repositories
         public Configdata GetConfigdataById(long id)
         {
             return context.Configdatas
-                          //.Include("EnvironmentT")
+                          .Include("Environment")
                           .Where(c => c.Id == id)
                           .FirstOrDefault();
         }
