@@ -12,7 +12,7 @@ namespace Domain.Repositories
 
         public DbSet<Configdata> Configdatas { get; set; }
         public DbSet<Environment> Environments { get; set; }
-       
+        public DbSet<Admin> Admins { get; set; }
 
     }
 }

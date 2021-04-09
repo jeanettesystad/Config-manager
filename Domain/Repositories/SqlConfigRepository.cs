@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace Domain.Repositories
@@ -17,6 +18,7 @@ namespace Domain.Repositories
         public IEnumerable<Environment> Environments =>
             context.Environments.Include("Configdatas");
 
+        public IEnumerable<Admin> Admins => context.Admins;
 
         public SqlConfigRepository(ConfigManagerContext context)
         {
@@ -81,6 +83,42 @@ namespace Domain.Repositories
         {
             context.SaveChanges();
             return true;
+        }
+
+        public Admin GetAdminById(long id)
+        {
+            return context.Admins
+                    .Where(a => a.Id == id)
+                    .FirstOrDefault();
+        }
+
+
+
+        //Make hash... 
+        public static byte[] GetHash(string inputString)
+        {
+            using (HashAlgorithm algorithm = SHA256.Create())
+                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+        }
+
+        public static string GetHashString(string inputString)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in GetHash(inputString))
+                sb.Append(b.ToString("X2"));
+
+            return sb.ToString();
+        }
+
+        public string VerifyUser(string username)
+        {
+            string code = context.Admins
+                            .Where(a => a.Username == username)
+                            .FirstOrDefault()
+                            .Password;
+
+
+            return GetHashString(username + code);
         }
     }
 }

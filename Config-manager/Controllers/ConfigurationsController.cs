@@ -166,5 +166,14 @@ namespace Config_manager.Controllers
 
         #endregion
 
+        #region Admin
+        [HttpGet("getToken/{username}")]
+        public IActionResult GetToken(string username) => Ok(repository.VerifyUser(username));
+
+
+
+
+        #endregion
+
     }
 }

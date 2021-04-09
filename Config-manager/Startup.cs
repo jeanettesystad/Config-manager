@@ -34,13 +34,12 @@ namespace Config_manager
             
             services.AddTransient<IConfigdataRepository, SqlConfigRepository>();
 
-            
             var connectionString = Configuration["ConnectionStrings:ConfigManagerContext"];
 
             // Configure EF.
             services.AddEntityFrameworkSqlServer()
                     .AddDbContext<ConfigManagerContext>(options => options.UseSqlServer(connectionString));
-
+                   
             // Configure a CORS policy.
             services.AddCors(options =>
             {

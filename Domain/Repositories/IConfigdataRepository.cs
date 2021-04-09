@@ -23,5 +23,13 @@ namespace Domain.Repositories
         Environment InsertEnvironment(Environment environment);
         bool UpdateEnvironment(Environment environment);
         bool DeleteEnvironment(long id);
+
+
+
+        IEnumerable<Admin> Admins { get; }
+
+        Admin GetAdminById(long id);
+        string VerifyUser(string username);
+
     }
 }
