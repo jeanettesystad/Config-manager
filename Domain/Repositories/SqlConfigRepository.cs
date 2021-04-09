@@ -48,7 +48,10 @@ namespace Domain.Repositories
 
         public bool UpdateConfigdata(Configdata configdata)
         {
-            return false;
+            context.Configdatas.Update(configdata);
+            context.SaveChanges();
+
+            return true;   
         }
 
         public Environment GetEnvironmentById(long id)
@@ -69,7 +72,10 @@ namespace Domain.Repositories
 
         public bool UpdateEnvironment(Environment environment)
         {
-            throw new System.NotImplementedException();
+            context.Environments.Update(environment);
+            context.SaveChanges();
+
+            return true;
         }
 
         public bool DeleteEnvironment(long id)

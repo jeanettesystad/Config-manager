@@ -42,7 +42,7 @@ namespace Config_manager.Controllers
         }
 
         [HttpPost("postConfiguration")]
-        public ActionResult<Configdata> Insert(Configdata configdata)
+        public ActionResult<Configdata> InsertConfig(Configdata configdata)
         {
             if (configdata == null)
             {
@@ -56,23 +56,25 @@ namespace Config_manager.Controllers
             }
         }
 
-
-        /*
-        // POST api/productsuggestions
-        [HttpPost]
-        public ActionResult<ProductSuggestion> InsertProductSuggestion(ProductSuggestion item)
+        [HttpPut("putConfiguration")]
+        public IActionResult UpdateConfig( [FromBody] Configdata configdata)
         {
-            if (item == null)
+            if (configdata == null)
             {
                 return BadRequest();
             }
+            else if (repository.UpdateConfigdata(configdata))
+            {
+                return Ok(configdata);
+            }
             else
             {
-                ProductSuggestion result = repository.Insert(item);
-                return CreatedAtAction("ProductSuggestionById", new { id = result.Id }, result);
+                return NotFound();
             }
         }
 
+
+        /*
         // PUT api/productsuggestions/2
         [HttpPut("{id}")]
         public IActionResult UpdateProduct(int id, [FromBody] ProductSuggestion item)
@@ -145,7 +147,22 @@ namespace Config_manager.Controllers
             }
         }
 
-
+        [HttpPut("putEnvironment")]
+        public IActionResult UpdateEnvironment([FromBody] Environment environment)
+        {
+            if (environment == null)
+            {
+                return BadRequest();
+            }
+            else if (repository.UpdateEnvironment(environment))
+            {
+                return Ok(environment);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
 
         #endregion
