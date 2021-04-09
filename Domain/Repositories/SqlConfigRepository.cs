@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,8 +23,6 @@ namespace Domain.Repositories
             this.context = context;
         }
 
-
-
         public Configdata GetConfigdataById(long id)
         {
             return context.Configdatas
@@ -32,7 +31,6 @@ namespace Domain.Repositories
         }
 
       
-
         public bool InsertConfigdata(Configdata configdata)
         {
             context.Configdatas.Add(configdata);

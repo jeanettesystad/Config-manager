@@ -6,6 +6,7 @@ using Domain.Entities;
 using Domain.Repositories;
 
 
+
 namespace Config_manager.Controllers
 {
     [Route("api/")]
@@ -22,8 +23,14 @@ namespace Config_manager.Controllers
         #region Configuration APIs
         [HttpGet("getConfigurations")]
         public ActionResult<IEnumerable<Configdata>> GetConfigdata()
-        {
+        {    
             return Ok(repository.Configdatas);
+        }
+
+        [HttpGet("getConfigurations/{from}/{to}")]
+        public ActionResult<IEnumerable<Configdata>> GetConfigdataByDate(System.DateTime from, System.DateTime to)
+        {
+            return Ok(repository.Configdatas.Where(c => from <= c.Timestamp && c.Timestamp <= to));
         }
 
         [HttpGet("getConfiguration/{id}")]

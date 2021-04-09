@@ -20,8 +20,6 @@ namespace Domain.Repositories
 
         Environment GetEnvironmentById(long id);
 
-        
-
         Environment InsertEnvironment(Environment environment);
         bool UpdateEnvironment(Environment environment);
         bool DeleteEnvironment(long id);
