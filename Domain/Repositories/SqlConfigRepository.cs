@@ -43,7 +43,10 @@ namespace Domain.Repositories
 
         public bool DeleteConfigdata(long id)
         {
-            return false;
+            context.Configdatas.Remove(GetConfigdataById(id));
+            context.SaveChanges();
+
+            return true;
         }
 
         public bool UpdateConfigdata(Configdata configdata)
@@ -62,12 +65,12 @@ namespace Domain.Repositories
                           .FirstOrDefault();
         }
 
-        public bool InsertEnvironment(Environment environment)
+        public Environment InsertEnvironment(Environment environment)
         {
             context.Environments.Add(environment);
             context.SaveChanges();
 
-            return true;
+            return environment;
         }
 
         public bool UpdateEnvironment(Environment environment)
@@ -80,7 +83,10 @@ namespace Domain.Repositories
 
         public bool DeleteEnvironment(long id)
         {
-            throw new System.NotImplementedException();
+            context.Environments.Remove(GetEnvironmentById(id));
+            context.SaveChanges();
+
+            return true;
         }
     }
 }

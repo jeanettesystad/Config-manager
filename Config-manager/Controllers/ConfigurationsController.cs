@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-//using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -73,17 +72,10 @@ namespace Config_manager.Controllers
             }
         }
 
-
-        /*
-        // PUT api/productsuggestions/2
-        [HttpPut("{id}")]
-        public IActionResult UpdateProduct(int id, [FromBody] ProductSuggestion item)
+        [HttpDelete("deleteConfiguration/{id}")]
+        public IActionResult DeleteConfig(long id)
         {
-            if (item == null)
-            {
-                return BadRequest();
-            }
-            else if (repository.Update(item))
+            if (repository.DeleteConfigdata(id))
             {
                 return Ok();
             }
@@ -93,20 +85,6 @@ namespace Config_manager.Controllers
             }
         }
 
-        // DELETE api/productsuggestions/2
-        [HttpDelete("{id}")]
-        public IActionResult DeleteProduct(int id)
-        {
-            if (repository.Delete(id))
-            {
-                return Ok();
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-        */
 
         #endregion
 
@@ -133,7 +111,7 @@ namespace Config_manager.Controllers
         }
 
         [HttpPost("postEnvironment")]
-        public ActionResult<Environment> Insert(Environment environment)
+        public ActionResult<Environment> InsertEnvironment(Environment environment)
         {
             if (environment == null)
             {
@@ -141,7 +119,9 @@ namespace Config_manager.Controllers
             }
             else
             {
-                repository.InsertEnvironment(environment);
+                environment = repository.InsertEnvironment(environment); 
+                
+                //repository.DeleteConfigdata(System.Convert.ToInt64(environment.Id));
 
                 return Ok(environment);
             }
@@ -164,6 +144,18 @@ namespace Config_manager.Controllers
             }
         }
 
+        [HttpDelete("deleteEnvironment/{id}")]
+        public IActionResult DeleteEnvironment(long id)
+        {
+            if (repository.DeleteEnvironment(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
 
         #endregion
 

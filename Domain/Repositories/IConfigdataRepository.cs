@@ -22,7 +22,7 @@ namespace Domain.Repositories
 
         
 
-        bool InsertEnvironment(Environment environment);
+        Environment InsertEnvironment(Environment environment);
         bool UpdateEnvironment(Environment environment);
         bool DeleteEnvironment(long id);
     }
