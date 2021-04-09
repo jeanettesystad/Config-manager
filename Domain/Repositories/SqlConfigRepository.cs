@@ -34,25 +34,19 @@ namespace Domain.Repositories
         public bool InsertConfigdata(Configdata configdata)
         {
             context.Configdatas.Add(configdata);
-            context.SaveChanges();
-
-            return true;
+            return SaveAndReturnTrue();
         }
 
         public bool DeleteConfigdata(long id)
         {
             context.Configdatas.Remove(GetConfigdataById(id));
-            context.SaveChanges();
-
-            return true;
+            return SaveAndReturnTrue();
         }
 
         public bool UpdateConfigdata(Configdata configdata)
         {
             context.Configdatas.Update(configdata);
-            context.SaveChanges();
-
-            return true;   
+            return SaveAndReturnTrue();
         }
 
         public Environment GetEnvironmentById(long id)
@@ -74,16 +68,18 @@ namespace Domain.Repositories
         public bool UpdateEnvironment(Environment environment)
         {
             context.Environments.Update(environment);
-            context.SaveChanges();
-
-            return true;
+            return SaveAndReturnTrue();
         }
 
         public bool DeleteEnvironment(long id)
         {
             context.Environments.Remove(GetEnvironmentById(id));
-            context.SaveChanges();
+            return SaveAndReturnTrue();
+        }
 
+        public bool SaveAndReturnTrue()
+        {
+            context.SaveChanges();
             return true;
         }
     }
