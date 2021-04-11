@@ -128,7 +128,7 @@ namespace Domain.Repositories
 
             var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
 
-            return $"[{{\"token\": \"{System.Convert.ToBase64String(bytesEncrypted)}\"}}]";   
+            return $"{{\"token\": \"{System.Convert.ToBase64String(bytesEncrypted)}\"}}";   
         }
         
         private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
@@ -162,6 +162,38 @@ namespace Domain.Repositories
 
             return encryptedBytes;
         }
+
+        //---------------- EKSTRA for string
+        public string VerifyUserString(string username)
+        {
+            string code = context.Admins
+                .Where(a => a.Username == username)
+                .Select(a => a.Password)
+                .FirstOrDefault();
+
+            if (code == null)
+                code = "If no password found, use this as default";
+
+            return EncryptString(username.Trim(), code.Trim());
+            //return Encrypt("The quick brown fox jumps over the lazy dog", "A test password");
+        }
+
+
+        public string EncryptString(string plainText, string password)
+        {
+
+            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
+
+            return System.Convert.ToBase64String(bytesEncrypted);
+        }
+
+
 
         #endregion
 

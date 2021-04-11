@@ -170,6 +170,8 @@ namespace Config_manager.Controllers
         [HttpGet("getToken/{username}")]
         public IActionResult GetToken(string username) => Ok(repository.VerifyUser(username));
 
+        [HttpGet("getTokenString/{username}")]
+        public IActionResult GetTokenString(string username) => Ok(repository.VerifyUserString(username));
 
 
 
