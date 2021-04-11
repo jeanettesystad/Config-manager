@@ -1,10 +1,10 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.IO;
 
 namespace Domain.Repositories
 {
@@ -25,6 +25,7 @@ namespace Domain.Repositories
             this.context = context;
         }
 
+        #region configdata
         public Configdata GetConfigdataById(long id)
         {
             return context.Configdatas
@@ -59,6 +60,9 @@ namespace Domain.Repositories
                           .FirstOrDefault();
         }
 
+        #endregion
+
+        #region Environment
         public Environment InsertEnvironment(Environment environment)
         {
             context.Environments.Add(environment);
@@ -85,6 +89,10 @@ namespace Domain.Repositories
             return true;
         }
 
+        #endregion
+
+        #region Admin - Token
+
         public Admin GetAdminById(long id)
         {
             return context.Admins
@@ -92,33 +100,76 @@ namespace Domain.Repositories
                     .FirstOrDefault();
         }
 
-
-
-        //Make hash... 
-        public static byte[] GetHash(string inputString)
-        {
-            using (HashAlgorithm algorithm = SHA256.Create())
-                return algorithm.ComputeHash(Encoding.UTF8.GetBytes(inputString));
-        }
-
-        public static string GetHashString(string inputString)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (byte b in GetHash(inputString))
-                sb.Append(b.ToString("X2"));
-
-            return sb.ToString();
-        }
-
+        
         public string VerifyUser(string username)
         {
             string code = context.Admins
-                            .Where(a => a.Username == username)
-                            .FirstOrDefault()
-                            .Password;
+                .Where(a => a.Username == username)
+                .Select(a => a.Password)
+                .FirstOrDefault();
 
+            if (code == null)
+                code = "If no password found, use this as default";
 
-            return GetHashString(username + code);
+            return Encrypt(username.Trim(), code.Trim());
+            //return Encrypt("The quick brown fox jumps over the lazy dog", "A test password");
         }
+
+      
+        public string Encrypt(string plainText, string password)
+        {
+
+            var bytesToBeEncrypted = Encoding.UTF8.GetBytes(plainText);
+            var passwordBytes = Encoding.UTF8.GetBytes(password);
+
+            // Hash the password with SHA256
+            passwordBytes = SHA256.Create().ComputeHash(passwordBytes);
+
+            var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
+
+            return System.Convert.ToBase64String(bytesEncrypted);
+        }
+        
+        private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
+        {
+            byte[] encryptedBytes = null;
+
+            var saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
+            using (MemoryStream ms = new MemoryStream())
+            {
+                using (RijndaelManaged AES = new RijndaelManaged())
+                {
+                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+
+                    AES.KeySize = 256;
+                    AES.BlockSize = 128;
+                    AES.Key = key.GetBytes(AES.KeySize / 8);
+                    AES.IV = key.GetBytes(AES.BlockSize / 8);
+
+                    AES.Mode = CipherMode.CBC;
+
+                    using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
+                    {
+                        cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
+                        cs.Close();
+                    }
+
+                    encryptedBytes = ms.ToArray();
+                }
+            }
+
+            return encryptedBytes;
+        }
+
+        #endregion
+
+
+
+
+
+
+
+
     }
 }
