@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace Domain.Repositories
 {
@@ -127,7 +128,7 @@ namespace Domain.Repositories
 
             var bytesEncrypted = Encrypt(bytesToBeEncrypted, passwordBytes);
 
-            return System.Convert.ToBase64String(bytesEncrypted);
+            return $"[{{\"token\": \"{System.Convert.ToBase64String(bytesEncrypted)}\"}}]";   
         }
         
         private static byte[] Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
