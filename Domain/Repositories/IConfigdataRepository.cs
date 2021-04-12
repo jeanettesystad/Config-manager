@@ -30,8 +30,6 @@ namespace Domain.Repositories
 
         Admin GetAdminById(long id);
         string VerifyUser(string username);
-        
-        string VerifyUserString(string username);
 
     }
 }
