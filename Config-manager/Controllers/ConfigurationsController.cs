@@ -128,8 +128,6 @@ namespace Config_manager.Controllers
             {
                 environment = repository.InsertEnvironment(environment); 
                 
-                //repository.DeleteConfigdata(System.Convert.ToInt64(environment.Id));
-
                 return Ok(environment);
             }
         }
